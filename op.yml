@@ -1,0 +1,24 @@
+description: merges objects
+inputs:
+  default:
+    object:
+      description: properties w/ lower precedence than override
+  override:
+    object:
+      description: properties overriding default
+outputs:
+  result:
+    object:
+      description: merged object
+run:
+  container:
+    cmd: [ node, /cmd.js ]
+    files:
+      /cmd.js:
+      /default.json: $(default)
+      /override.json: $(override)
+      /result: $(result)
+    image: { ref: 'node:11.13-alpine' }
+name: github.com/opspec-pkgs/object.merge
+opspec: 0.1.6
+version: 1.0.0
